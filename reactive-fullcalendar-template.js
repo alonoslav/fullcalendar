@@ -6,16 +6,18 @@ var reactiveFullcalendar = function (options) {
   var calendarEl = document.createElement('div');
 
   calendarEl.id = options.id || 'fullCalendar';
-  calendarEl.className = `calendar ${options.addedClasses}`;
+  calendarEl.className = 'calendar ' + options.addedClasses;
 
-  jQuery(`#${calendarEl.id}_wrapper`).append(calendarEl);
+  jQuery('#' + calendarEl.id + '_wrapper').append(calendarEl);
 
   var calendar = jQuery(calendarEl).fullCalendar(options);
 
   var autorunFunctions = function () {
-    if (options.autoruns) {
+    if (options.autoruns && jQuery.isArray(options.autoruns)) {
       options.autoruns.forEach(function (funcDef) {
-        funcDef();
+        if (jQuery.isFunction(funcDef)) {
+          funcDef();
+        }
       });
     }
   };
@@ -25,8 +27,8 @@ var reactiveFullcalendar = function (options) {
   };
 
   return {
-    autorunFunctions,
     update,
+    autorunFunctions,
   };
 };
 
@@ -43,6 +45,6 @@ Template.ReactiveFullcalendar.rendered = function () {
 
 Template.ReactiveFullcalendar.helpers({
   id: function () {
-    return (this.options && this.options.id || "fullCalendar") + "_wrapper";
+    return (this.options && this.options.id || 'fullCalendar') + '_wrapper';
   }
 });
