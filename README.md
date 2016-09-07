@@ -1,4 +1,4 @@
-# jss:reactive-fullcalendar
+# jss:reactive-fullcalendar (with Scheduler functionality)
 
 Based on https://github.com/gquemart/meteor-reactive-fullcalendar
 
@@ -57,6 +57,9 @@ Template.myTemplate.helpers({
       
       callback(events);
     },
+
+    goToDate: new Date(), // you can use this parameter for providing reactive fullcalendar date changing
+
     // Optional: id of the calendar
     id: 'calendar1',
     // Optional: Additional classes to apply to the calendar

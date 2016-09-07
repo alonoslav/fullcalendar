@@ -22,7 +22,14 @@ var reactiveFullcalendar = function (options) {
     }
   };
 
-  var update = function () {
+  var update = function (newOptions) {
+    // check do we need to change calendar date
+    const goToDate = newOptions.goToDate;
+
+    if (goToDate) {
+      calendar.fullCalendar('gotoDate', new Date(goToDate));
+    }
+
     calendar.fullCalendar('refetchEvents');
   };
 
@@ -34,11 +41,12 @@ var reactiveFullcalendar = function (options) {
 
 
 Template.ReactiveFullcalendar.rendered = function () {
-  var data = this.data;
-  var calendar = reactiveFullcalendar(data.options);
+  var calendar = reactiveFullcalendar(this.data.options);
 
   this.autorun(function () {
-    calendar.update();
+    const data = Template.currentData();
+
+    calendar.update(data.options);
     calendar.autorunFunctions();
   });
 };

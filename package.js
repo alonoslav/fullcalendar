@@ -1,7 +1,7 @@
 Package.describe({
   name: 'jss:reactive-fullcalendar',
   summary: 'Meteor Reactive - Full-sized drag & drop event calendar (jQuery plugin - v2.1.1)',
-  version: '1.1.1',
+  version: '1.1.2',
   git: 'https://github.com/alonoslav/fullcalendar.git',
 });
 
