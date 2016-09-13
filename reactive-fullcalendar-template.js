@@ -24,7 +24,7 @@ var reactiveFullcalendar = function (options) {
 
   var update = function (newOptions) {
     // check do we need to change calendar date
-    const goToDate = newOptions.goToDate;
+    var goToDate = newOptions.goToDate;
 
     if (goToDate) {
       calendar.fullCalendar('gotoDate', new Date(goToDate));
@@ -34,22 +34,22 @@ var reactiveFullcalendar = function (options) {
   };
 
   return {
-    update,
-    autorunFunctions,
+    update: update,
+    autorunFunctions: autorunFunctions
   };
 };
 
 
-Template.ReactiveFullcalendar.rendered = function () {
+Template.ReactiveFullcalendar.onRendered(function () {
   var calendar = reactiveFullcalendar(this.data.options);
 
   this.autorun(function () {
-    const data = Template.currentData();
+    var data = Template.currentData();
 
     calendar.update(data.options);
     calendar.autorunFunctions();
   });
-};
+});
 
 Template.ReactiveFullcalendar.helpers({
   id: function () {
