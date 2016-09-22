@@ -31,6 +31,11 @@ var reactiveFullcalendar = function (options) {
     }
 
     calendar.fullCalendar('refetchEvents');
+    calendar.fullCalendar('rerenderEvents');
+
+    if (newOptions.resources) {
+      calendar.fullCalendar('refetchResources');
+    }
   };
 
   return {
